@@ -1,5 +1,7 @@
 # envguard
 
+<img width="960" height="540" alt="demo" src="https://github.com/user-attachments/assets/331f0520-7906-46e8-8f6e-0a1aa03e5502" />
+
 > Stop shipping code that reads environment variables you never documented.
 
 `envguard` scans your project for every environment variable your code reads, compares them with your `.env.example`, and tells you what's missing, what's unused, and what's undocumented. Run it locally or in CI to catch config drift before it reaches production.
