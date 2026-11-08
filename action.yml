@@ -1,0 +1,35 @@
+name: 'envguard'
+description: 'Fail CI when env vars used in code drift from .env.example'
+branding:
+  icon: 'check-circle'
+  color: 'green'
+inputs:
+  template:
+    description: 'Template file, relative to the repository root'
+    required: false
+    default: '.env.example'
+  strict:
+    description: 'Also fail on variables documented but never read'
+    required: false
+    default: 'false'
+  format:
+    description: 'Output format: text, json or github'
+    required: false
+    default: 'github'
+  ignore:
+    description: 'Comma-separated variables to ignore'
+    required: false
+    default: ''
+runs:
+  using: 'composite'
+  steps:
+    - shell: bash
+      env:
+        INPUT_TEMPLATE: ${{ inputs.template }}
+        INPUT_FORMAT: ${{ inputs.format }}
+        INPUT_IGNORE: ${{ inputs.ignore }}
+        INPUT_STRICT: ${{ inputs.strict }}
+      run: |
+        ARGS=(--template "$INPUT_TEMPLATE" --format "$INPUT_FORMAT" --ignore "$INPUT_IGNORE")
+        if [ "$INPUT_STRICT" = "true" ]; then ARGS+=(--strict); fi
+        node "${{ github.action_path }}/bin/envguard.js" "${ARGS[@]}"

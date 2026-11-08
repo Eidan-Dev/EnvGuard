@@ -1,0 +1,11 @@
+{
+  "name": "envguard",
+  "version": "0.1.0",
+  "description": "Catch missing or unused env vars before they break production. Scans your code, validates your .env.example, and fails CI on drift.",
+  "bin": { "envguard": "bin/envguard.js" },
+  "files": ["bin", "src"],
+  "engines": { "node": ">=18" },
+  "scripts": { "test": "node --test" },
+  "keywords": ["env", "dotenv", "devops", "cli", "ci-cd", "developer-tools", "static-analysis"],
+  "license": "MIT"
+}
